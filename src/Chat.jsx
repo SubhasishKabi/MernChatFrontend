@@ -34,7 +34,7 @@ const Chat = () => {
 
   const connectToWebSocket = () => {
     //this ws is not same as that in usestate hook
-    const ws = new WebSocket("ws://localhost:4000");
+    const ws = new WebSocket("ws://mernchat-2uyg.onrender.com");
     setWs(ws);
     ws.addEventListener("message", handleMessage);
     ws.addEventListener("close", () => {
