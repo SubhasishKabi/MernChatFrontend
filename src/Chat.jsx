@@ -8,7 +8,7 @@ import uniqBy from "lodash/uniqBy";
 import axios from "axios";
 import Contact from "./Contact";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://mernchat-2uyg.onrender.com";
 
 const Chat = () => {
   const [ws, setWs] = useState(null);

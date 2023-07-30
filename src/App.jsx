@@ -4,7 +4,7 @@ import UserContext from "./UserContext";
 import RegisterAndLoginForm from "./RegisterAndLoginForm";
 import Chat from "./Chat";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://mernchat-2uyg.onrender.com";
 axios.defaults.withCredentials = true;
 
 function App() {
