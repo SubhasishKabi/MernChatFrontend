@@ -27,6 +27,9 @@ const Chat = () => {
   // console.log(messages)
   const [offlinePeople, setOfflinePeople] = useState({});
 
+  const selectedUserIdRef = useRef(selectedUserId);
+  selectedUserIdRef.current = selectedUserId
+
   //small trick to reconnect to webSocket
   const BoxRef = useRef();
   useEffect(() => {
@@ -58,6 +61,8 @@ const Chat = () => {
     setOnlinePeople(people);
   }
 
+  // console.log( 'selected user id', selectedUserId)
+  // console.log(messages)
   function handleMessage(e) {
     // console.log("new message", e);
     const messageData = JSON.parse(e.data);
@@ -65,7 +70,9 @@ const Chat = () => {
     if ("online" in messageData) {
       showOnlinePeople(messageData.online);
     } else if ("text" in messageData) {
-      if (messageData.sender === selectedUserId) {
+      // console.log(messageData.sender);
+      // console.log('selected user id inside function',selectedUserId);
+      if (messageData.sender === selectedUserIdRef.current) {
         // console.log(messageData);
         setMessages((prev) => [
           // console.log(prev),
@@ -173,6 +180,9 @@ const Chat = () => {
   // console.log(onlinePeopleExcMe)
   // console.log(offlinePeople)
   // console.log(messages);
+  // console.log(onlinePeopleExcMe)
+  // console.log('selected user id',  selectedUserId)
+
   //--------------------------------------COMPONENT BELOW-------------------------------------------------//
 
   return (
@@ -185,9 +195,13 @@ const Chat = () => {
               key={userId}
               online={true}
               id={userId}
-              setSelectedid={setSelectedUserId}
-              selectedid={selectedUserId}
+              // setSelectedid={setSelectedUserId}
+              // selectedid={selectedUserId}
               userName={onlinePeopleExcMe[userId]}
+              onClick={() => {
+                setSelectedUserId(userId);
+              }}
+              selected={userId === selectedUserId}
             />
           ))}
           {Object.keys(offlinePeople).map((userId) => (
@@ -195,9 +209,11 @@ const Chat = () => {
               key={userId}
               online={false}
               id={userId}
-              setSelectedid={setSelectedUserId}
-              selectedid={selectedUserId}
+              // setSelectedid={setSelectedUserId}
+              // selectedid={selectedUserId}
               userName={offlinePeople[userId].userName}
+              onClick={() => setSelectedUserId(userId)}
+              selected={userId === selectedUserId}
             />
           ))}
         </div>
