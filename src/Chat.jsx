@@ -8,7 +8,8 @@ import uniqBy from "lodash/uniqBy";
 import axios from "axios";
 import Contact from "./Contact";
 
-axios.defaults.baseURL = "https://mernchat-2uyg.onrender.com";
+// axios.defaults.baseURL = "https://mernchat-2uyg.onrender.com";
+axios.defaults.baseURL = "https://localhost:4000";
 
 const Chat = () => {
   const [ws, setWs] = useState(null);
@@ -34,7 +35,9 @@ const Chat = () => {
 
   const connectToWebSocket = () => {
     //this ws is not same as that in usestate hook
-    const ws = new WebSocket("ws://mernchat-2uyg.onrender.com");
+    // const ws = new WebSocket("ws://mernchat-2uyg.onrender.com");
+    const ws = new WebSocket("ws://localhost:4000");
+
     setWs(ws);
     ws.addEventListener("message", handleMessage);
     ws.addEventListener("close", () => {
